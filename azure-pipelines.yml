@@ -34,5 +34,11 @@ stages:
             backendAzureRmStorageAccountName: 'terraformstatefileaccoun'
             backendAzureRmContainerName: 'tfstate'
             backendAzureRmKey: 'aks-test.tfstate'
-                
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+            
+
+            
         
