@@ -22,4 +22,8 @@ stages:
             targetPath: '$(Pipeline.Workspace)'
             artifact: 'Published-artifacts'
             publishLocation: 'pipeline'
+        - task: TerraformInstaller@1
+          inputs:
+                terraformVersion: 'latest'
+                
         
