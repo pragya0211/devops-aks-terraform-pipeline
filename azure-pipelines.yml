@@ -22,4 +22,20 @@ stages:
             targetPath: '$(Pipeline.Workspace)'
             artifact: 'Published-artifacts'
             publishLocation: 'pipeline'
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: 'azuredevops_azurerm_svc'
+            backendAzureRmResourceGroupName: 'terra'
+            backendAzureRmStorageAccountName: 'terraformstatefileaccoun'
+            backendAzureRmContainerName: 'tfstate'
+            backendAzureRmKey: 'aks-test.tfstate'
+        - task: TerraformTaskV4@4
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
             
