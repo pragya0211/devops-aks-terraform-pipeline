@@ -1,0 +1,25 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+# Define Variables
+variables:
+- name: DEV_ENVIRONMENT
+  value: dev 
+- name: QA_ENVIRONMENT
+  value: qa
+
+stages:
+  - stage: terraformValidate
+    jobs:
+      - job: terraformValidate
+        continueOnError: true
+        steps:
+        - task: PublishPipelineArtifact@1
+          inputs:
+            targetPath: '$(Pipeline.Workspace)'
+            artifact: 'Published-artifacts'
+            publishLocation: 'pipeline'
+            
