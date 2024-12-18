@@ -62,4 +62,10 @@ stages:
                 backendAzureRmStorageAccountName: 'terraformstatefileaccoun'
                 backendAzureRmContainerName: 'tfstate'
                 backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
-                
+            - task: TerraformTaskV4@4
+              inputs:
+                provider: 'azurerm'
+                command: 'plan'
+                workingDirectory: '$(Pipeline.Workspace)/published-artifacts'
+                commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-output/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                environmentServiceNameAzureRM: 'azuredevops_azurerm_svc'
