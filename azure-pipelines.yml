@@ -38,4 +38,17 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'validate'
-            
+  - stage: DeployAKSClusters
+    jobs:
+    - deployment: DeployDevAKSCluster
+      displayName: DeployDevAKSCluster
+      pool:
+        vmImage: 'ubuntu-latest'
+      environment: $(DEV_ENVIRONMENT)      
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: DownloadSecureFile@1
+              inputs:
+                secureFile: 'id_rsa.pub.txt'
