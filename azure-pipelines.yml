@@ -52,3 +52,4 @@ stages:
             - task: DownloadSecureFile@1
               inputs:
                 secureFile: 'id_rsa.pub.txt'
+                
