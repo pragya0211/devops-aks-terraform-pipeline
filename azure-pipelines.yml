@@ -69,3 +69,10 @@ stages:
                 workingDirectory: '$(Pipeline.Workspace)/published-artifacts'
                 commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-output/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 environmentServiceNameAzureRM: 'azuredevops_azurerm_svc'
+            - task: TerraformTaskV4@4
+              inputs:
+                provider: 'azurerm'
+                command: 'apply'
+                workingDirectory: '$(Pipeline.Workspace)/published-artifacts'
+                commandOptions: '$(Pipeline.Workspace)/published-artifacts/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                environmentServiceNameAzureRM: 'azuredevops_azurerm_svc'
