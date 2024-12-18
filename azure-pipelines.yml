@@ -52,4 +52,13 @@ stages:
             - task: DownloadSecureFile@1
               inputs:
                 secureFile: 'id_rsa.pub.txt'
-                
+            - task: TerraformTaskV4@4
+              inputs:
+                provider: 'azurerm'
+                command: 'init'
+                workingDirectory: '$(Pipeline.Workspace)/published-artifacts'
+                backendServiceArm: 'azuredevops_azurerm_svc'
+                backendAzureRmResourceGroupName: 'terra'
+                backendAzureRmStorageAccountName: 'terraformstatefileaccoun'
+                backendAzureRmContainerName: 'tfstate'
+                backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
