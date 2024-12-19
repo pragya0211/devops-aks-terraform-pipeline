@@ -36,9 +36,9 @@ stages:
              backendAzureRmStorageAccountName: 'terraformstatefileaccoun'
              backendAzureRmContainerName: 'tfstate'
              backendAzureRmKey: 'aks-test.tfstate'
-             allowTelemetryCollection: false
+             allowTelemetryCollection: true
          - task: TerraformCLI@2
            inputs:
              command: 'validate'
-             allowTelemetryCollection: false
+             allowTelemetryCollection: true
 
