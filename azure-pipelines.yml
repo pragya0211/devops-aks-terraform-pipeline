@@ -19,11 +19,7 @@ stages:
       - job: terraformValidate
         continueOnError: true
         steps:
-         - task: PublishPipelineArtifact@1
-           inputs:
-             targetPath: '$(Pipeline.Workspace)'
-             artifact: '$(System.DefaultWorkingDirectory)/terraform'
-             publishLocation: 'pipeline'
+         
          - task: TerraformInstaller@2
            inputs:
              terraformVersion: 'latest'
